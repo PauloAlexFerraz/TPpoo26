@@ -57,6 +57,14 @@ build CMakeFiles/TPpoo26.dir/main.cpp.obj: CXX_COMPILER__TPpoo26_unscanned_Debug
   TARGET_COMPILE_PDB = CMakeFiles\TPpoo26.dir\
   TARGET_PDB = TPpoo26.pdb
 
+build CMakeFiles/TPpoo26.dir/Jardim.cpp.obj: CXX_COMPILER__TPpoo26_unscanned_Debug C$:/Users/shado/CLionProjects/TPpoo26/Jardim.cpp || cmake_object_order_depends_target_TPpoo26
+  DEP_FILE = CMakeFiles\TPpoo26.dir\Jardim.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\TPpoo26.dir
+  OBJECT_FILE_DIR = CMakeFiles\TPpoo26.dir
+  TARGET_COMPILE_PDB = CMakeFiles\TPpoo26.dir\
+  TARGET_PDB = TPpoo26.pdb
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target TPpoo26
@@ -65,7 +73,7 @@ build CMakeFiles/TPpoo26.dir/main.cpp.obj: CXX_COMPILER__TPpoo26_unscanned_Debug
 #############################################
 # Link the executable TPpoo26.exe
 
-build TPpoo26.exe: CXX_EXECUTABLE_LINKER__TPpoo26_Debug CMakeFiles/TPpoo26.dir/main.cpp.obj
+build TPpoo26.exe: CXX_EXECUTABLE_LINKER__TPpoo26_Debug CMakeFiles/TPpoo26.dir/main.cpp.obj CMakeFiles/TPpoo26.dir/Jardim.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\TPpoo26.dir
