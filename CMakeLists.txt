@@ -13,4 +13,5 @@ add_executable(TPpoo26 main.cpp
         Cacto.cpp
         Cacto.h
         Planta.cpp
-        Planta.h)
+        Planta.h
+        Settings.h)

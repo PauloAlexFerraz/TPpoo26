@@ -92,7 +92,7 @@ void Comandos::interpretar(const string& linha) { // le os comandos
             if (lin >= 0 && lin < 26 && col >= 0 && col < 26) {
                 if (tipo == 'c') {
                     Cacto* nova = new Cacto(lin, col);
-                   // jardim->adicionarPlanta(nova); // <-- precisa implementar este método no Jardim
+                   // jardim->adicionarPlanta(nova); // <-- precisa implementar este metodo no Jardim !!!!!!!!!!!!!!!! IMPORTANTE
                     cout << "Cacto plantado na posição (" << lin << "," << col << ").\n";
                 } else {
                     cout << "Tipo de planta desconhecido.\n";
