@@ -10,7 +10,7 @@ int main()
 
 
     return 0;
-    kkdkdkdkdkd
+    return 0;>>>>>>>>
 
 
 }
