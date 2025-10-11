@@ -1,55 +1,54 @@
 #include "Jardim.h"
 using namespace std;
 
-// Construtor
-Jardim::Jardim(int nLinhas, int nColunas) {
-    linhas = nLinhas;
-    colunas = nColunas;
-
-    // Alocação dinâmica da matriz
-    area = new char*[linhas];
-    for (int i = 0; i < linhas; ++i) {
-        area[i] = new char[colunas];
-        for (int j = 0; j < colunas; ++j)
-            area[i][j] = ' '; // inicia tudo vazio
-    }
+Jardim::Jardim(int nLinhas, int nColunas)
+    : linhas(nLinhas), colunas(nColunas)
+{
+    // aloca a matriz dinâmica de solos
+    solos = new Solo*[linhas];
+    for (int i = 0; i < linhas; ++i)
+        solos[i] = new Solo[colunas];
 }
 
-// Destrutor
 Jardim::~Jardim() {
     for (int i = 0; i < linhas; ++i)
-        delete[] area[i];
-    delete[] area;
+        delete[] solos[i];
+    delete[] solos;
 }
 
-// Converte número -> letra (0 -> 'A', 1 -> 'B', ...)
 char Jardim::numeroParaLetra(int n) const {
     return 'A' + n;
 }
 
-// Define o símbolo de uma posição (ex: planta, ferramenta, jardineiro)
-void Jardim::definirPosicao(int linha, int coluna, char simbolo) {
-    if (linha < linhas && coluna < colunas)
-        area[linha][coluna] = simbolo;
-}
-
-// Limpa uma posição
-void Jardim::limparPosicao(int linha, int coluna) {
-    if (linha < linhas &&  coluna < colunas)
-        area[linha][coluna] = ' ';
-}
-
-// Imprime o jardim na consola com a régua de letras
+// Mostra apenas o mapa visual
 void Jardim::imprimir() const {
-    cout << "  "; // canto superior esquerdo
+    cout << " ";
     for (int j = 0; j < colunas; ++j)
         cout << numeroParaLetra(j);
     cout << endl;
 
     for (int i = 0; i < linhas; ++i) {
-        cout << numeroParaLetra(i) << " "; // régua lateral esquerda
+        cout << numeroParaLetra(i) << " ";
         for (int j = 0; j < colunas; ++j)
-            cout << area[i][j];
+            cout << ' '; // mais tarde será planta/ferramenta/etc.
         cout << endl;
     }
 }
+
+// Mostra detalhes de todos os solos
+void Jardim::listarArea() const {
+    cout << "\n--- Informacao do Solo ---\n";
+    for (int i = 0; i < linhas; ++i) {
+        for (int j = 0; j < colunas; ++j) {
+            cout << numeroParaLetra(i) << numeroParaLetra(j)
+                 << " -> Agua: " << solos[i][j].getAgua()
+                 << ", Nutrientes: " << solos[i][j].getNutrientes() << endl;
+        }
+    }
+    cout << "-----------------------------------\n";
+}
+
+Solo& Jardim::getSolo(int linha, int coluna) {
+    return solos[linha][coluna];
+}
+

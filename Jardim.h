@@ -2,29 +2,28 @@
 #define JARDIM_H
 
 #include <iostream>
+#include "Solo.h"
 
 class Jardim {
 private:
-    int linhas;       // número de linhas do jardim
-    int colunas;      // número de colunas do jardim
-    char** area;      // matriz dinâmica que representa o conteúdo do jardim
+    int linhas;
+    int colunas;
+    Solo** solos; // matriz de solos
 
-    // converte número -> letra (0 -> 'A', 1 -> 'B', ...)
     char numeroParaLetra(int n) const;
 
 public:
-    // Construtor e destrutor
     Jardim(int nLinhas, int nColunas);
     ~Jardim();
 
-    // Métodos principais
-    void definirPosicao(int linha, int coluna, char simbolo); // define o símbolo numa posição
-    void limparPosicao(int linha, int coluna);                // limpa a posição (coloca espaço)
-    void imprimir() const;                                   // mostra o jardim na consola
+    void imprimir() const;
+    void listarArea() const; // novo método
 
-    // Getters simples
     int getNumLinhas() const { return linhas; }
     int getNumColunas() const { return colunas; }
+
+    Solo& getSolo(int linha, int coluna);
 };
 
 #endif
+
