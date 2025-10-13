@@ -3,58 +3,70 @@
 using namespace std;
 
 Cacto::Cacto(int linha, int coluna)
-    : Planta(linha, coluna, 'c')
-{
+    : Planta(linha, coluna, 'c') {
     agua = 0;
     nutrientes = 0;
+    instantesAguaAlta = 0;
+    instantesNutrientesZero = 0;
 }
 
 void Cacto::atualizar(Solo& solo) {
     if (!viva)
         return;
 
-    // ⚙️ Copiar valores do Settings (não podes usar diretamente)
-    const int absorcaoAguaPercentagem = 25;
-    const int absorcaoNutrientes = 5;
-    const int morreAguaSoloMaior = 100;
-    const int morreAguaSoloInstantes = 3;
-    const int morreNutrientesSoloInstantes = 3;
+    int aguaSolo = solo.getAgua();
+    int nutrientesSolo = solo.getNutrientes();
 
-    // --- Absorção de água ---
-    int absorvidaAgua = (solo.getAgua() * absorcaoAguaPercentagem) / 100;
-    agua += absorvidaAgua;
+    // Absorção de água e nutrientes
+    int absorvidaAgua = (aguaSolo * 25) / 100; // 25%
+    int absorvidaNutrientes = (nutrientesSolo < 5) ? nutrientesSolo : 5;
+
+    // Retira do solo
     solo.removerAgua(absorvidaAgua);
-
-    // --- Absorção de nutrientes ---
-    int disponivel = solo.getNutrientes();
-    int absorvidaNutrientes = absorcaoNutrientes;
-    if (absorvidaNutrientes > disponivel)
-        absorvidaNutrientes = disponivel;
-
-    nutrientes += absorvidaNutrientes;
     solo.removerNutrientes(absorvidaNutrientes);
 
-    // --- Verifica condições de morte ---
-    if (solo.getAgua() > morreAguaSoloMaior)
+    // Adiciona ao cacto
+    agua += absorvidaAgua;
+    nutrientes += absorvidaNutrientes;
+
+    // Verificar condições fatais
+    if (aguaSolo > 100)
         instantesAguaAlta++;
     else
         instantesAguaAlta = 0;
 
-    if (solo.getNutrientes() <= 0)
+    if (nutrientesSolo <= 0)
         instantesNutrientesZero++;
     else
         instantesNutrientesZero = 0;
 
-    if (instantesAguaAlta >= morreAguaSoloInstantes ||
-        instantesNutrientesZero >= morreNutrientesSoloInstantes) {
-        viva = false;
-        cout << "O cacto em "
+    if (instantesAguaAlta >= 3 || instantesNutrientesZero >= 3) {
+        morrer(solo);
+        return;
+    }
+
+    // Multiplicação (opcional, avisar o jardim)
+    if (nutrientes > 100 && agua > 50) {
+        cout << "🌵 Cacto ("
              << (char)('A' + linha)
              << (char)('A' + coluna)
-             << " morreu.\n";
-        }
+             << ") quer multiplicar-se!\n";
+        nutrientes /= 2;
+        agua /= 2;
+    }
 }
 
-string Cacto::getNome() const {
+void Cacto::morrer(Solo& solo) {
+    viva = false;
+    solo.adicionarNutrientes(nutrientes);
+    nutrientes = 0;
+    agua = 0;
+    cout << "Cacto morreu em ("
+         << (char)('A' + linha)
+         << (char)('A' + coluna)
+         << ")\n";
+}
+std::string Cacto::getNome() const {
     return "Cacto";
 }
+

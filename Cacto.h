@@ -11,6 +11,8 @@
 
 class Cacto : public Planta {
 private:
+    int agua = 0;
+    int nutrientes = 0;
     int instantesAguaAlta = 0;
     int instantesNutrientesZero = 0;
 
@@ -18,6 +20,7 @@ public:
     Cacto(int linha, int coluna);
 
     void atualizar(Solo& solo) override;     // comportamento por instante
+    void morrer(Solo& solo);                 // função para lidar com morte
     std::string getNome() const override;    // nome textual
 };
 
