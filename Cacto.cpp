@@ -47,7 +47,7 @@ void Cacto::atualizar(Solo& solo) {
 
     // Multiplicação (opcional, avisar o jardim)
     if (nutrientes > 100 && agua > 50) {
-        cout << "🌵 Cacto ("
+        cout << "Cacto ("
              << (char)('A' + linha)
              << (char)('A' + coluna)
              << ") quer multiplicar-se!\n";
