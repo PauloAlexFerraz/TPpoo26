@@ -7,6 +7,8 @@
 #include <sstream>
 
 #include "Cacto.h"
+#include "Roseira.h"
+
 using namespace std;
 
 Comandos::Comandos() : jardim(nullptr) {}
@@ -65,6 +67,29 @@ void Comandos::interpretar(const string& linha) { // le os comandos
         }
     }
 
+    else if (comando == "avanca") {
+        if (jardim == nullptr) {
+            cout << "Ainda não existe jardim.\n";
+            return;
+        }
+
+        cout << "A avancar 1 turno...\n";
+
+        // percorre todo o jardim
+        for (int i = 0; i < jardim->getNumLinhas(); ++i) {
+            for (int j = 0; j < jardim->getNumColunas(); ++j) {
+                Planta* p = jardim->getPlanta(i, j);
+                if (p != nullptr && p->estaViva()) {
+                    Solo& solo = jardim->getSolo(i, j);
+                    p->atualizar(solo);
+                }
+            }
+        }
+
+        jardim->imprimir();
+    }
+
+
     else if (comando == "larea") {
         if (jardim == nullptr) {
             cout << "Ainda não existe jardim. Crie-o com 'jardim <linhas> <colunas>'.\n";
@@ -80,28 +105,51 @@ void Comandos::interpretar(const string& linha) { // le os comandos
     }
 
     else if (comando == "planta") {
-        int lin, col;
+        string pos;
         char tipo;
 
-        if (ss >> lin >> col >> tipo) {
+        if (ss >> pos >> tipo) {
             if (jardim == nullptr) {
                 cout << "Ainda não existe jardim. Crie-o primeiro.\n";
                 return;
             }
 
-            if (lin >= 0 && lin < 26 && col >= 0 && col < 26) {
-                if (tipo == 'c') {
-                    Cacto* nova = new Cacto(lin, col);
-                   // jardim->adicionarPlanta(nova); // <-- precisa implementar este metodo no Jardim !!!!!!!!!!!!!!!! IMPORTANTE
-                    cout << "Cacto plantado na posição (" << lin << "," << col << ").\n";
-                } else {
-                    cout << "Tipo de planta desconhecido.\n";
-                }
+            if (pos.size() != 2) {
+                cout << "Posição inválida. Usa formato <letra><letra> (ex: bc).\n";
+                return;
+            }
+
+            int lin = tolower(pos[0]) - 'a';
+            int col = tolower(pos[1]) - 'a';
+
+            if (lin < 0 || lin >= jardim->getNumLinhas() || col < 0 || col >= jardim->getNumColunas()) {
+                cout << "Posição fora dos limites do jardim.\n";
+                return;
+            }
+
+            Planta* nova = nullptr;
+
+            if (tipo == 'c') {
+                nova = new Cacto(lin, col);
+            }else if (tipo == 'r')
+            {
+                nova = new Roseira(lin, col);
+            }
+            else {
+                cout << "Tipo de planta desconhecido.\n";
+                return;
+            }
+
+            if (jardim->adicionarPlanta(lin, col, nova)) {
+                cout << "Planta " << nova->getNome()
+                     << " colocada em " << pos << ".\n";
+                jardim->imprimir();  // redesenha o mapa
             } else {
-                cout << "Posição inválida. Use valores entre 0 e 25.\n";
+                cout << "Já existe uma planta nessa posição.\n";
+                delete nova;
             }
         } else {
-            cout << "Uso: planta <linha> <coluna> <tipo>\n";
+            cout << "Uso: planta <posição> <tipo>\n";
         }
     }
 

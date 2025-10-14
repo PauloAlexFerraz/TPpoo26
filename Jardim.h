@@ -4,11 +4,14 @@
 #include <iostream>
 #include "Solo.h"
 
+class Planta; // 👈 forward declaration
+
 class Jardim {
 private:
     int linhas;
     int colunas;
-    Solo** solos; // matriz de solos
+    Solo** solos;
+    Planta*** plantas; // 👈 adiciona esta linha
 
     char numeroParaLetra(int n) const;
 
@@ -17,13 +20,14 @@ public:
     ~Jardim();
 
     void imprimir() const;
-    void listarArea() const; // novo método
+    void listarArea() const;
+
+    bool adicionarPlanta(int linha, int coluna, Planta* p);
+    Planta* getPlanta(int linha, int coluna) const;
+    Solo& getSolo(int linha, int coluna);
 
     int getNumLinhas() const { return linhas; }
     int getNumColunas() const { return colunas; }
-
-    Solo& getSolo(int linha, int coluna);
 };
 
 #endif
-

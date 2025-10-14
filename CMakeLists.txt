@@ -14,4 +14,6 @@ add_executable(TPpoo26 main.cpp
         Cacto.h
         Planta.cpp
         Planta.h
-        Settings.h)
+        Settings.h
+        Roseira.cpp
+        Roseira.h)
