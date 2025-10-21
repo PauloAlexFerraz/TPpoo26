@@ -5,6 +5,7 @@
 #ifndef SOLO_H
 #define SOLO_H
 
+#include "Settings.h"
 #include <cstdlib>
 
 class Solo {

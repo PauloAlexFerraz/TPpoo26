@@ -7,16 +7,19 @@
 
 #include "Planta.h"
 #include "Settings.h"
+#include <string>
 
 class Roseira : public Planta {
 private:
-    int instantesViva; // contador de tempo de vida (para evoluções futuras)
+    int instantesViva;
+    int flores; // número de flores (para comportamento visual, opcional)
 
 public:
     Roseira(int linha, int coluna);
 
     void atualizar(Solo& solo) override;
-    std::string getNome() const override { return "Roseira"; }
+    void morrer(Solo& solo);
+    std::string getNome() const override;
 };
 
 #endif

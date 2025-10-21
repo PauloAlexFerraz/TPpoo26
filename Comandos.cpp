@@ -7,6 +7,8 @@
 #include <sstream>
 
 #include "Cacto.h"
+#include "ErvaDaninha.h"
+#include "Orquidia.h"
 #include "Roseira.h"
 
 using namespace std;
@@ -134,6 +136,12 @@ void Comandos::interpretar(const string& linha) { // le os comandos
             }else if (tipo == 'r')
             {
                 nova = new Roseira(lin, col);
+            } else if (tipo =='e')
+            {
+                nova = new ErvaDaninha(lin,col);
+            } else if (tipo == 'x')
+            {
+                nova = new Orquidia(lin, col);
             }
             else {
                 cout << "Tipo de planta desconhecido.\n";

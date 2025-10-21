@@ -16,4 +16,8 @@ add_executable(TPpoo26 main.cpp
         Planta.h
         Settings.h
         Roseira.cpp
-        Roseira.h)
+        Roseira.h
+        ErvaDaninha.cpp
+        ErvaDaninha.h
+        Orquidia.cpp
+        Orquidia.h)

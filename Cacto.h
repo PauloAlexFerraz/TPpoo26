@@ -11,8 +11,7 @@
 
 class Cacto : public Planta {
 private:
-    int agua = 0;
-    int nutrientes = 0;
+
     int instantesAguaAlta = 0;
     int instantesNutrientesZero = 0;
 
