@@ -21,6 +21,8 @@ public:
 
     void imprimir() const;
     void listarArea() const;
+    void listarSolo(int lin, int col, int raio = 0) const;
+
 
     bool adicionarPlanta(int linha, int coluna, Planta* p);
     Planta* getPlanta(int linha, int coluna) const;

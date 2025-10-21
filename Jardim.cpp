@@ -81,6 +81,35 @@ void Jardim::listarArea() const {
     cout << "-----------------------------------\n";
 }
 
+void Jardim::listarSolo(int lin, int col, int raio) const {
+    cout << "\n--- Informação do Solo (raio " << raio << ") ---\n";
+
+    int linInicio = max(0, lin - raio);
+    int linFim = min(linhas - 1, lin + raio);
+    int colInicio = max(0, col - raio);
+    int colFim = min(colunas - 1, col + raio);
+
+    for (int i = linInicio; i <= linFim; ++i) {
+        for (int j = colInicio; j <= colFim; ++j) {
+            const Solo& s = solos[i][j];
+            Planta* p = plantas[i][j];
+
+            cout << numeroParaLetra(i) << numeroParaLetra(j)
+                 << " -> agua: " << s.getAgua()
+                 << ", Nutrientes: " << s.getNutrientes();
+
+            if (p != nullptr) {
+                cout << " | Planta: " << p->getNome()
+                     << (p->estaViva() ? " (viva)" : " (morta)") << endl;
+            } else {
+                cout << " | [vazio]" << endl;
+            }
+        }
+    }
+    cout << "-----------------------------------\n";
+}
+
+
 Solo& Jardim::getSolo(int linha, int coluna) {
     return solos[linha][coluna];
 }

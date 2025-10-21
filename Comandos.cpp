@@ -92,6 +92,8 @@ void Comandos::interpretar(const string& linha) { // le os comandos
     }
 
 
+
+
     else if (comando == "larea") {
         if (jardim == nullptr) {
             cout << "Ainda não existe jardim. Crie-o com 'jardim <linhas> <colunas>'.\n";
@@ -100,8 +102,40 @@ void Comandos::interpretar(const string& linha) { // le os comandos
         }
     }
 
+    else if (comando == "lsolo") {
+        if (jardim == nullptr) {
+            cout << "Ainda não existe jardim. Crie-o com 'jardim <linhas> <colunas>'.\n";
+            return;
+        }
 
-    else if (comando == "terminar") { // terminar
+        string pos;
+        int raio = 0;
+        if (!(ss >> pos)) {
+            cout << "Uso: lsolo <posição> [raio]\n";
+            return;
+        }
+
+        ss >> raio;
+
+        if (pos.size() != 2) {
+            cout << "Posição inválida. Usa formato <letra><letra> (ex: df).\n";
+            return;
+        }
+
+        int lin = tolower(pos[0]) - 'a';
+        int col = tolower(pos[1]) - 'a';
+
+        if (lin < 0 || lin >= jardim->getNumLinhas() ||
+            col < 0 || col >= jardim->getNumColunas()) {
+            cout << "Posição fora dos limites do jardim.\n";
+            return;
+            }
+
+        jardim->listarSolo(lin, col, raio);
+    }
+
+
+    else if (comando == "fim") { // terminar
         cout << "A terminar o simulador...\n";
         exit(0);
     }
