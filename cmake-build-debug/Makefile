@@ -56,10 +56,10 @@ RM = "C:\Program Files\JetBrains\CLion 2024.2.3\bin\cmake\win\x64\bin\cmake.exe"
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\guilh\CLionProjects\TPpoo26
+CMAKE_SOURCE_DIR = C:\Users\guilh\CLionProjects\TPpoo27
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\guilh\CLionProjects\TPpoo26\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\guilh\CLionProjects\TPpoo27\cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -86,9 +86,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\guilh\CLionProjects\TPpoo26\cmake-build-debug\CMakeFiles C:\Users\guilh\CLionProjects\TPpoo26\cmake-build-debug\\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\guilh\CLionProjects\TPpoo27\cmake-build-debug\CMakeFiles C:\Users\guilh\CLionProjects\TPpoo27\cmake-build-debug\\CMakeFiles\progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\guilh\CLionProjects\TPpoo26\cmake-build-debug\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\guilh\CLionProjects\TPpoo27\cmake-build-debug\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -176,6 +176,30 @@ Comandos.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TPpoo26.dir\build.make CMakeFiles/TPpoo26.dir/Comandos.cpp.s
 .PHONY : Comandos.cpp.s
 
+ErvaDaninha.obj: ErvaDaninha.cpp.obj
+.PHONY : ErvaDaninha.obj
+
+# target to build an object file
+ErvaDaninha.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TPpoo26.dir\build.make CMakeFiles/TPpoo26.dir/ErvaDaninha.cpp.obj
+.PHONY : ErvaDaninha.cpp.obj
+
+ErvaDaninha.i: ErvaDaninha.cpp.i
+.PHONY : ErvaDaninha.i
+
+# target to preprocess a source file
+ErvaDaninha.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TPpoo26.dir\build.make CMakeFiles/TPpoo26.dir/ErvaDaninha.cpp.i
+.PHONY : ErvaDaninha.cpp.i
+
+ErvaDaninha.s: ErvaDaninha.cpp.s
+.PHONY : ErvaDaninha.s
+
+# target to generate assembly for a file
+ErvaDaninha.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TPpoo26.dir\build.make CMakeFiles/TPpoo26.dir/ErvaDaninha.cpp.s
+.PHONY : ErvaDaninha.cpp.s
+
 Jardim.obj: Jardim.cpp.obj
 .PHONY : Jardim.obj
 
@@ -199,6 +223,30 @@ Jardim.s: Jardim.cpp.s
 Jardim.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TPpoo26.dir\build.make CMakeFiles/TPpoo26.dir/Jardim.cpp.s
 .PHONY : Jardim.cpp.s
+
+Orquidia.obj: Orquidia.cpp.obj
+.PHONY : Orquidia.obj
+
+# target to build an object file
+Orquidia.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TPpoo26.dir\build.make CMakeFiles/TPpoo26.dir/Orquidia.cpp.obj
+.PHONY : Orquidia.cpp.obj
+
+Orquidia.i: Orquidia.cpp.i
+.PHONY : Orquidia.i
+
+# target to preprocess a source file
+Orquidia.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TPpoo26.dir\build.make CMakeFiles/TPpoo26.dir/Orquidia.cpp.i
+.PHONY : Orquidia.cpp.i
+
+Orquidia.s: Orquidia.cpp.s
+.PHONY : Orquidia.s
+
+# target to generate assembly for a file
+Orquidia.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TPpoo26.dir\build.make CMakeFiles/TPpoo26.dir/Orquidia.cpp.s
+.PHONY : Orquidia.cpp.s
 
 Planta.obj: Planta.cpp.obj
 .PHONY : Planta.obj
@@ -224,6 +272,30 @@ Planta.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TPpoo26.dir\build.make CMakeFiles/TPpoo26.dir/Planta.cpp.s
 .PHONY : Planta.cpp.s
 
+Roseira.obj: Roseira.cpp.obj
+.PHONY : Roseira.obj
+
+# target to build an object file
+Roseira.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TPpoo26.dir\build.make CMakeFiles/TPpoo26.dir/Roseira.cpp.obj
+.PHONY : Roseira.cpp.obj
+
+Roseira.i: Roseira.cpp.i
+.PHONY : Roseira.i
+
+# target to preprocess a source file
+Roseira.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TPpoo26.dir\build.make CMakeFiles/TPpoo26.dir/Roseira.cpp.i
+.PHONY : Roseira.cpp.i
+
+Roseira.s: Roseira.cpp.s
+.PHONY : Roseira.s
+
+# target to generate assembly for a file
+Roseira.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TPpoo26.dir\build.make CMakeFiles/TPpoo26.dir/Roseira.cpp.s
+.PHONY : Roseira.cpp.s
+
 Solo.obj: Solo.cpp.obj
 .PHONY : Solo.obj
 
@@ -247,6 +319,30 @@ Solo.s: Solo.cpp.s
 Solo.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TPpoo26.dir\build.make CMakeFiles/TPpoo26.dir/Solo.cpp.s
 .PHONY : Solo.cpp.s
+
+adubo.obj: adubo.cpp.obj
+.PHONY : adubo.obj
+
+# target to build an object file
+adubo.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TPpoo26.dir\build.make CMakeFiles/TPpoo26.dir/adubo.cpp.obj
+.PHONY : adubo.cpp.obj
+
+adubo.i: adubo.cpp.i
+.PHONY : adubo.i
+
+# target to preprocess a source file
+adubo.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TPpoo26.dir\build.make CMakeFiles/TPpoo26.dir/adubo.cpp.i
+.PHONY : adubo.cpp.i
+
+adubo.s: adubo.cpp.s
+.PHONY : adubo.s
+
+# target to generate assembly for a file
+adubo.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TPpoo26.dir\build.make CMakeFiles/TPpoo26.dir/adubo.cpp.s
+.PHONY : adubo.cpp.s
 
 main.obj: main.cpp.obj
 .PHONY : main.obj
@@ -287,15 +383,27 @@ help:
 	@echo ... Comandos.obj
 	@echo ... Comandos.i
 	@echo ... Comandos.s
+	@echo ... ErvaDaninha.obj
+	@echo ... ErvaDaninha.i
+	@echo ... ErvaDaninha.s
 	@echo ... Jardim.obj
 	@echo ... Jardim.i
 	@echo ... Jardim.s
+	@echo ... Orquidia.obj
+	@echo ... Orquidia.i
+	@echo ... Orquidia.s
 	@echo ... Planta.obj
 	@echo ... Planta.i
 	@echo ... Planta.s
+	@echo ... Roseira.obj
+	@echo ... Roseira.i
+	@echo ... Roseira.s
 	@echo ... Solo.obj
 	@echo ... Solo.i
 	@echo ... Solo.s
+	@echo ... adubo.obj
+	@echo ... adubo.i
+	@echo ... adubo.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

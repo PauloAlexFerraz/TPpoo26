@@ -8,12 +8,12 @@
 
 #include <string>
 #include "Jardim.h"
-
+#include "adubo.h"
 
 class Comandos {
 private:
     Jardim* jardim;  // ponteiro para o jardim atual (criado dinamicamente)
-
+    Adubo pacote;
 public:
     Comandos();
     ~Comandos();

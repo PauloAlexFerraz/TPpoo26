@@ -14,8 +14,26 @@ void Cacto::atualizar(Solo& solo) {
     if (!viva)
         return;
 
+
     int aguaSolo = solo.getAgua();
     int nutrientesSolo = solo.getNutrientes();
+
+    // Verificar condições fatais antes de alterar o solo
+    if (aguaSolo > Settings::Cacto::morre_agua_solo_maior)
+        instantesAguaAlta++;
+    else
+        instantesAguaAlta = 0;
+
+    if (nutrientesSolo < Settings::Cacto::morre_nutrientes_solo_menor)
+        instantesNutrientesZero++;
+    else
+        instantesNutrientesZero = 0;
+
+    if (instantesAguaAlta >= Settings::Cacto::morre_agua_solo_instantes ||
+        instantesNutrientesZero >= Settings::Cacto::morre_nutrientes_solo_instantes) {
+        morrer(solo);
+        return;
+        }
 
     // Absorção de água e nutrientes conforme Settings
     int absorvidaAgua = (aguaSolo * Settings::Cacto::absorcao_agua_percentagem) / 100;
@@ -31,29 +49,13 @@ void Cacto::atualizar(Solo& solo) {
     agua += absorvidaAgua;
     nutrientes += absorvidaNutrientes;
 
-    // Verificar condições fatais
-    if (aguaSolo > Settings::Cacto::morre_agua_solo_maior)
-        instantesAguaAlta++;
-    else
-        instantesAguaAlta = 0;
 
-    if (nutrientesSolo < Settings::Cacto::morre_nutrientes_solo_menor)
-        instantesNutrientesZero++;
-    else
-        instantesNutrientesZero = 0;
-
-    if (instantesAguaAlta >= Settings::Cacto::morre_agua_solo_instantes ||
-        instantesNutrientesZero >= Settings::Cacto::morre_nutrientes_solo_instantes) {
-        morrer(solo);
-        return;
-    }
 
     // Multiplicação (condições ideais)
     if (nutrientes > Settings::Cacto::multiplica_nutrientes_maior &&
         agua > Settings::Cacto::multiplica_agua_maior) {
 
-        cout << "Cacto ("
-             << (char)('A' + linha)
+        cout << "Cacto (" << (char)('A' + linha)
              << (char)('A' + coluna)
              << ") quer multiplicar-se!\n";
 

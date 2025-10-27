@@ -195,6 +195,24 @@ void Comandos::interpretar(const string& linha) { // le os comandos
         }
     }
 
+    else if (comando == "adubo") {
+        if (jardim == nullptr) { cout << "Crie o jardim primeiro.\n"; return; }
+        string pos;
+        if (!(ss >> pos)) { cout << "Uso: adubo <posição>\n"; return; }
+        if (pos.size() != 2) { cout << "Formato inválido, ex: bc\n"; return; }
+
+        int lin = tolower(pos[0]) - 'a';
+        int col = tolower(pos[1]) - 'a';
+        if (lin < 0 || lin >= jardim->getNumLinhas() || col < 0 || col >= jardim->getNumColunas()) {
+            cout << "Posição fora dos limites.\n"; return;
+        }
+
+        pacote.aplicar(jardim->getSolo(lin, col));
+    }
+
+
+
+
 
     else { // erro
         cout << "Comando desconhecido: " << comando << endl;
