@@ -4,14 +4,17 @@
 #include <iostream>
 #include "Solo.h"
 
+
 class Planta; // 👈 forward declaration
+class Jardineiro;
 
 class Jardim {
 private:
     int linhas;
     int colunas;
     Solo** solos;
-    Planta*** plantas; // 👈 adiciona esta linha
+    Planta** plantas; // 👈 adiciona esta linha
+    Jardineiro* jardineiro;
 
     char numeroParaLetra(int n) const;
 
@@ -27,6 +30,9 @@ public:
     bool adicionarPlanta(int linha, int coluna, Planta* p);
     Planta* getPlanta(int linha, int coluna) const;
     Solo& getSolo(int linha, int coluna);
+
+    void setJardineiro(Jardineiro* j) { jardineiro = j; }
+    Jardineiro* getJardineiro() const { return jardineiro; }
 
     int getNumLinhas() const { return linhas; }
     int getNumColunas() const { return colunas; }

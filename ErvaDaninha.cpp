@@ -66,6 +66,6 @@ void ErvaDaninha::morrer(Solo& solo) {
          << ")\n";
 }
 
-std::string ErvaDaninha::getNome() const {
+std::string ErvaDaninha::getNome() const{
     return "ErvaDaninha";
 }

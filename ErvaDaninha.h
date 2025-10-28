@@ -17,7 +17,7 @@ private:
 public:
     ErvaDaninha(int linha, int coluna);
 
-    void atualizar(Solo& solo) override;     // comportamento por instante
+    void atualizar(Solo& solo);     // comportamento por instante
     void morrer(Solo& solo);                 // comportamento ao morrer
     std::string getNome() const override;    // nome textual
 };

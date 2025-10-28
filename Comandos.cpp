@@ -6,14 +6,17 @@
 #include <iostream>
 #include <sstream>
 
-#include "Cacto.h"
-#include "ErvaDaninha.h"
-#include "Orquidia.h"
+
+
+
 #include "Roseira.h"
+#include "Jardineiro.h"
 
 using namespace std;
 
-Comandos::Comandos() : jardim(nullptr) {}
+Comandos::Comandos()
+    : jardim(nullptr), jardineiro(nullptr) // ✅ adiciona isto
+{}
 
 Comandos::~Comandos() { //destrutor
     delete jardim;
@@ -88,6 +91,9 @@ void Comandos::interpretar(const string& linha) { // le os comandos
             }
         }
 
+        if (jardineiro)
+            jardineiro->novoTurno();
+
         jardim->imprimir();
     }
 
@@ -145,7 +151,7 @@ void Comandos::interpretar(const string& linha) { // le os comandos
         char tipo;
 
         if (ss >> pos >> tipo) {
-            if (jardim == nullptr) {
+            if (!jardim) {
                 cout << "Ainda não existe jardim. Crie-o primeiro.\n";
                 return;
             }
@@ -163,21 +169,8 @@ void Comandos::interpretar(const string& linha) { // le os comandos
                 return;
             }
 
-            Planta* nova = nullptr;
-
-            if (tipo == 'c') {
-                nova = new Cacto(lin, col);
-            }else if (tipo == 'r')
-            {
-                nova = new Roseira(lin, col);
-            } else if (tipo =='e')
-            {
-                nova = new ErvaDaninha(lin,col);
-            } else if (tipo == 'x')
-            {
-                nova = new Orquidia(lin, col);
-            }
-            else {
+            Planta* nova = Planta::criarPlanta(tipo, lin, col);
+            if (!nova) {
                 cout << "Tipo de planta desconhecido.\n";
                 return;
             }
@@ -185,7 +178,7 @@ void Comandos::interpretar(const string& linha) { // le os comandos
             if (jardim->adicionarPlanta(lin, col, nova)) {
                 cout << "Planta " << nova->getNome()
                      << " colocada em " << pos << ".\n";
-                jardim->imprimir();  // redesenha o mapa
+                jardim->imprimir();
             } else {
                 cout << "Já existe uma planta nessa posição.\n";
                 delete nova;
@@ -194,6 +187,42 @@ void Comandos::interpretar(const string& linha) { // le os comandos
             cout << "Uso: planta <posição> <tipo>\n";
         }
     }
+
+
+
+    else if (comando == "entra") {
+        string pos;
+        if (!(ss >> pos) || pos.size() != 2) {
+            cout << "Uso: entra <posição> (ex: ab)\n";
+            return;
+        }
+        if (!jardim) { cout << "Crie o jardim primeiro.\n"; return; }
+
+        int lin = tolower(pos[0]) - 'a';
+        int col = tolower(pos[1]) - 'a';
+
+        if (!jardineiro) {
+            jardineiro = new Jardineiro(jardim);
+            jardim->setJardineiro(jardineiro);
+        }
+
+        jardineiro->entra(lin, col);
+        jardim->imprimir();
+    }
+
+    else if (comando == "sai") {
+        if (!jardineiro) { cout << "O jardineiro ainda não existe.\n"; return; }
+        jardineiro->sai();
+        jardim->imprimir();
+    }
+
+
+    else if (comando == "c" || comando == "b" || comando == "e" || comando == "d") {
+        if (!jardineiro) { cout << "O jardineiro ainda não existe.\n"; return; }
+        jardineiro->mover(comando[0]);
+        jardim->imprimir();
+    }
+
 
     else if (comando == "adubo") {
         if (jardim == nullptr) { cout << "Crie o jardim primeiro.\n"; return; }

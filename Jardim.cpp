@@ -1,42 +1,37 @@
 #include "Jardim.h"
-#include "Planta.h"  // 👈 IMPORTANTE: para o compilador saber o que é Planta
+#include "Planta.h"
+#include "Jardineiro.h"
 using namespace std;
 
 Jardim::Jardim(int nLinhas, int nColunas)
-    : linhas(nLinhas), colunas(nColunas)
+    : linhas(nLinhas), colunas(nColunas), solos(nullptr), plantas(nullptr), jardineiro(nullptr)
 {
-    // aloca a matriz dinâmica de solos
+    // Aloca solos
     solos = new Solo*[linhas];
-    plantas = new Planta**[linhas]; // 👈 nova matriz de plantas
-
-    for (int i = 0; i < linhas; ++i) {
+    for (int i = 0; i < linhas; ++i)
         solos[i] = new Solo[colunas];
-        plantas[i] = new Planta*[colunas];
 
-        for (int j = 0; j < colunas; ++j)
-            plantas[i][j] = nullptr; // 👈 inicializa a posição sem planta
-    }
+    // Aloca plantas
+    plantas = new Planta*[linhas * colunas];
+    for (int i = 0; i < linhas * colunas; ++i)
+        plantas[i] = nullptr;
 }
 
 Jardim::~Jardim() {
-    // liberta as plantas e o solo
-    for (int i = 0; i < linhas; ++i) {
-        for (int j = 0; j < colunas; ++j)
-            delete plantas[i][j]; // 👈 apaga cada planta criada dinamicamente
+    for (int i = 0; i < linhas * colunas; ++i)
+        delete plantas[i];
 
-        delete[] plantas[i]; // liberta linha de ponteiros
-        delete[] solos[i];   // liberta linha de solos
-    }
+    for (int i = 0; i < linhas; ++i)
+        delete[] solos[i];
 
-    delete[] plantas; // 👈 liberta o array principal
     delete[] solos;
+    delete[] plantas;
 }
 
 char Jardim::numeroParaLetra(int n) const {
     return 'A' + n;
 }
 
-// Mostra o mapa visual
 void Jardim::imprimir() const {
     cout << "  ";
     for (int j = 0; j < colunas; ++j)
@@ -46,35 +41,48 @@ void Jardim::imprimir() const {
     for (int i = 0; i < linhas; ++i) {
         cout << numeroParaLetra(i) << " ";
         for (int j = 0; j < colunas; ++j) {
-            if (plantas[i][j] != nullptr)
-                cout << plantas[i][j]->getSimbolo(); // 👈 mostra o símbolo da planta
-            else
-                cout << ' ';
+
+            // ✅ se o jardineiro estiver aqui, mostra '*'
+            if (jardineiro && jardineiro->estaDentro() &&
+                jardineiro->getLinha() == i &&
+                jardineiro->getColuna() == j) {
+                cout << '*';
+                continue;
+                }
+
+            // mantém a tua lógica original
+            Planta* p = plantas[i * colunas + j];
+            cout << (p ? p->getSimbolo() : ' ');
         }
         cout << endl;
     }
 }
 
 bool Jardim::adicionarPlanta(int linha, int coluna, Planta* p) {
+    int idx = linha * colunas + coluna;
     if (linha < 0 || linha >= linhas || coluna < 0 || coluna >= colunas)
         return false;
+    if (plantas[idx] != nullptr)
+        return false;
 
-    if (plantas[linha][coluna] != nullptr)
-        return false; // já existe planta aqui
-
-    plantas[linha][coluna] = p;
+    plantas[idx] = p;
     return true;
 }
 
+Planta* Jardim::getPlanta(int linha, int coluna) const {
+    return plantas[linha * colunas + coluna];
+}
 
+Solo& Jardim::getSolo(int linha, int coluna) {
+    return solos[linha][coluna];
+}
 
-// Mostra detalhes de todos os solos
 void Jardim::listarArea() const {
-    cout << "\n--- Informacao do Solo ---\n";
+    cout << "\n--- Informação do Solo ---\n";
     for (int i = 0; i < linhas; ++i) {
         for (int j = 0; j < colunas; ++j) {
             cout << numeroParaLetra(i) << numeroParaLetra(j)
-                 << " -> Agua: " << solos[i][j].getAgua()
+                 << " -> Água: " << solos[i][j].getAgua()
                  << ", Nutrientes: " << solos[i][j].getNutrientes() << endl;
         }
     }
@@ -83,7 +91,6 @@ void Jardim::listarArea() const {
 
 void Jardim::listarSolo(int lin, int col, int raio) const {
     cout << "\n--- Informação do Solo (raio " << raio << ") ---\n";
-
     int linInicio = max(0, lin - raio);
     int linFim = min(linhas - 1, lin + raio);
     int colInicio = max(0, col - raio);
@@ -92,28 +99,18 @@ void Jardim::listarSolo(int lin, int col, int raio) const {
     for (int i = linInicio; i <= linFim; ++i) {
         for (int j = colInicio; j <= colFim; ++j) {
             const Solo& s = solos[i][j];
-            Planta* p = plantas[i][j];
+            Planta* p = plantas[i * colunas + j];
 
             cout << numeroParaLetra(i) << numeroParaLetra(j)
-                 << " -> agua: " << s.getAgua()
+                 << " -> Água: " << s.getAgua()
                  << ", Nutrientes: " << s.getNutrientes();
 
-            if (p != nullptr) {
-                cout << " | Planta: " << p->getNome()
-                     << (p->estaViva() ? " (viva)" : " (morta)") << endl;
-            } else {
-                cout << " | [vazio]" << endl;
-            }
+            if (p)
+                cout << " | Planta: " << p->getNome() << (p->estaViva() ? " (viva)" : " (morta)");
+            else
+                cout << " | [vazio]";
+            cout << endl;
         }
     }
     cout << "-----------------------------------\n";
-}
-
-
-Solo& Jardim::getSolo(int linha, int coluna) {
-    return solos[linha][coluna];
-}
-
-Planta* Jardim::getPlanta(int linha, int coluna) const {
-    return plantas[linha][coluna];
 }

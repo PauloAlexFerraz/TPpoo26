@@ -6,6 +6,7 @@
 #define ADUBO_H
 
 #include "Solo.h"
+#include "Settings.h"
 #include <iostream>
 
 class Adubo {

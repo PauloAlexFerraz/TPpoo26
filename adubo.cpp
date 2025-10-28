@@ -5,12 +5,12 @@
 #include "adubo.h"
 
 
-Adubo::Adubo() : quantidade(100) {} // começa com 100 unidades
+Adubo::Adubo() : quantidade(Settings::Adubo::capacidade) {} // começa com 100 unidades
 
 void Adubo::aplicar(Solo &solo) {
-    if (quantidade >= 10) {
-        solo.adicionarNutrientes(10);
-        quantidade = quantidade - 10;
+    if (quantidade >= Settings::Adubo::dose) {
+        solo.adicionarNutrientes(Settings::Adubo::dose);
+        quantidade = quantidade - Settings::Adubo::dose;
         std::cout << "Adubo aplicado! Restam " << quantidade << " unidades.\n";
     } else if (quantidade > 0) {
         solo.adicionarNutrientes(quantidade);

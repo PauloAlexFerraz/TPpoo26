@@ -89,6 +89,6 @@ void Orquidia::morrer(Solo& solo) {
          << ")\n";
 }
 
-std::string Orquidia::getNome() const {
+std::string Orquidia::getNome() const{
     return "Orquidia";
 }

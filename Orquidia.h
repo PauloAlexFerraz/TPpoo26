@@ -28,7 +28,7 @@ private:
 public:
     Orquidia(int linha, int coluna);
 
-    void atualizar(Solo& solo) override;
+    void atualizar(Solo& solo);
     void morrer(Solo& solo);
     std::string getNome() const override;
 };

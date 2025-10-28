@@ -103,6 +103,18 @@ build CMakeFiles/TPpoo26.dir/Orquidia.cpp.obj: CXX_COMPILER__TPpoo26_unscanned_D
   OBJECT_DIR = CMakeFiles\TPpoo26.dir
   OBJECT_FILE_DIR = CMakeFiles\TPpoo26.dir
 
+build CMakeFiles/TPpoo26.dir/adubo.cpp.obj: CXX_COMPILER__TPpoo26_unscanned_Debug C$:/Users/shado/CLionProjects/TPpoo26/adubo.cpp || cmake_object_order_depends_target_TPpoo26
+  DEP_FILE = CMakeFiles\TPpoo26.dir\adubo.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\TPpoo26.dir
+  OBJECT_FILE_DIR = CMakeFiles\TPpoo26.dir
+
+build CMakeFiles/TPpoo26.dir/Jardineiro.cpp.obj: CXX_COMPILER__TPpoo26_unscanned_Debug C$:/Users/shado/CLionProjects/TPpoo26/Jardineiro.cpp || cmake_object_order_depends_target_TPpoo26
+  DEP_FILE = CMakeFiles\TPpoo26.dir\Jardineiro.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\TPpoo26.dir
+  OBJECT_FILE_DIR = CMakeFiles\TPpoo26.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target TPpoo26
@@ -111,7 +123,7 @@ build CMakeFiles/TPpoo26.dir/Orquidia.cpp.obj: CXX_COMPILER__TPpoo26_unscanned_D
 #############################################
 # Link the executable TPpoo26.exe
 
-build TPpoo26.exe: CXX_EXECUTABLE_LINKER__TPpoo26_Debug CMakeFiles/TPpoo26.dir/main.cpp.obj CMakeFiles/TPpoo26.dir/Jardim.cpp.obj CMakeFiles/TPpoo26.dir/Comandos.cpp.obj CMakeFiles/TPpoo26.dir/Solo.cpp.obj CMakeFiles/TPpoo26.dir/Cacto.cpp.obj CMakeFiles/TPpoo26.dir/Planta.cpp.obj CMakeFiles/TPpoo26.dir/Roseira.cpp.obj CMakeFiles/TPpoo26.dir/ErvaDaninha.cpp.obj CMakeFiles/TPpoo26.dir/Orquidia.cpp.obj
+build TPpoo26.exe: CXX_EXECUTABLE_LINKER__TPpoo26_Debug CMakeFiles/TPpoo26.dir/main.cpp.obj CMakeFiles/TPpoo26.dir/Jardim.cpp.obj CMakeFiles/TPpoo26.dir/Comandos.cpp.obj CMakeFiles/TPpoo26.dir/Solo.cpp.obj CMakeFiles/TPpoo26.dir/Cacto.cpp.obj CMakeFiles/TPpoo26.dir/Planta.cpp.obj CMakeFiles/TPpoo26.dir/Roseira.cpp.obj CMakeFiles/TPpoo26.dir/ErvaDaninha.cpp.obj CMakeFiles/TPpoo26.dir/Orquidia.cpp.obj CMakeFiles/TPpoo26.dir/adubo.cpp.obj CMakeFiles/TPpoo26.dir/Jardineiro.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\TPpoo26.dir

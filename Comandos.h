@@ -9,11 +9,14 @@
 #include <string>
 #include "Jardim.h"
 #include "adubo.h"
+#include "Jardineiro.h"
 
 class Comandos {
 private:
     Jardim* jardim;  // ponteiro para o jardim atual (criado dinamicamente)
+    Jardineiro* jardineiro;
     Adubo pacote;
+
 public:
     Comandos();
     ~Comandos();

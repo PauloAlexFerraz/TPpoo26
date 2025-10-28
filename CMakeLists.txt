@@ -22,4 +22,6 @@ add_executable(TPpoo26 main.cpp
         Orquidia.cpp
         Orquidia.h
         adubo.cpp
-        adubo.h)
+        adubo.h
+        Jardineiro.cpp
+        Jardineiro.h)

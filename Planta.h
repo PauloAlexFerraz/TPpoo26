@@ -1,11 +1,8 @@
-//
-// Created by shado on 11/10/2025.
-//
 #ifndef PLANTA_H
 #define PLANTA_H
 
-#include <string>
 #include "Solo.h"
+#include <string>
 
 class Planta {
 protected:
@@ -16,15 +13,18 @@ protected:
     bool viva;
     char simbolo;
 
+
 public:
     Planta(int l, int c, char simb);
-    virtual ~Planta() = default;
+    ~Planta(); // destrutor normal
 
-    virtual void atualizar(Solo& solo) = 0; // agora recebe referência ao solo
-    virtual std::string getNome() const = 0;
+    virtual void atualizar(Solo& solo)=0;
+    virtual std::string getNome() const=0;
 
-    char getSimbolo() const { return simbolo; }
     bool estaViva() const { return viva; }
+    char getSimbolo() const { return simbolo; }
+
+    static Planta* criarPlanta(char tipo, int linha, int coluna);
 };
 
 #endif
