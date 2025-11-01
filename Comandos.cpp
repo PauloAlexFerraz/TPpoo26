@@ -15,7 +15,7 @@
 using namespace std;
 
 Comandos::Comandos()
-    : jardim(nullptr), jardineiro(nullptr) // ✅ adiciona isto
+    : jardim(nullptr), jardineiro(nullptr)
 {}
 
 Comandos::~Comandos() { //destrutor
@@ -24,12 +24,12 @@ Comandos::~Comandos() { //destrutor
 
 
 void Comandos::cicloPrincipal() { // ciclo comandos
-    cout << "Simulador de Jardim ( 'terminar' para sair)\n";
-    cout << "Escreve comando 'Jardim 6 13' sendo que o 6 e 13 sao dimensoes escolhidas\n";
+    cout << "Jardim ( 'fim' para sair)\n";
+    cout << "Escrever por exemplo comando 'Jardim 6 13' sendo que o 6 e 13 sao dimensoes escolhidas\n";
 
     string linha;
     while (true) {
-        cout << "> ";
+        cout << "Comando: ";
         getline(cin, linha);
         interpretar(linha);
     }
@@ -43,15 +43,14 @@ void Comandos::interpretar(const string& linha) { // le os comandos
     if (comando.empty())
         return;
 
-    if (comando == "jardim") { // criar jardim com dimensoes
+    if (comando == "jardim") {
         int linhas, colunas;
 
         if (ss >> linhas >> colunas) {
             if (jardim == nullptr) {
                 if (linhas > 0 && linhas <= 26 && colunas > 0 && colunas <= 26) {
                     jardim = new Jardim(linhas, colunas);
-                    cout << "Jardim criado com " << linhas
-                         << " linhas e " << colunas << " colunas.\n";
+                    cout << "Jardim criado com " << linhas << " linhas e " << colunas << " colunas.\n";
                     jardim->imprimir();
                 } else {
                     cout << "Erro: o tamanho maximo do jardim é 26x26.\n";
@@ -60,13 +59,13 @@ void Comandos::interpretar(const string& linha) { // le os comandos
                 cout << "Erro: o jardim ja foi criado.\n";
             }
         } else {
-            cout << "Uso: jardim <linhas> <colunas>\n";
+            cout << "Usa: jardim <linhas> <colunas>\n";
         }
     }
 
-    else if (comando == "mostrar") { // para mostrar o jardim
+    else if (comando == "mostrar") {
         if (jardim == nullptr) {
-            cout << "jardim ainda nao foi criado. Usa 'jardim <linhas> <colunas>' primeiro.\n";
+            cout << "ainda nao existe jardim\n";
         } else {
             jardim->imprimir();
         }
@@ -74,7 +73,7 @@ void Comandos::interpretar(const string& linha) { // le os comandos
 
     else if (comando == "avanca") {
         if (jardim == nullptr) {
-            cout << "Ainda não existe jardim.\n";
+            cout << "Ainda nao existe jardim\n";
             return;
         }
 
@@ -90,6 +89,11 @@ void Comandos::interpretar(const string& linha) { // le os comandos
                     {
                         jardim->removePlanta(i,j);
                     }
+                    if(p->querMultiplicar())
+                    {
+                        p->multiplicar();
+                        jardim->criarPlantaAdjacente(p);
+                    }
                 }
             }
         }
@@ -103,7 +107,7 @@ void Comandos::interpretar(const string& linha) { // le os comandos
 
     else if (comando == "larea") {
         if (jardim == nullptr) {
-            cout << "Ainda não existe jardim. Crie-o com 'jardim <linhas> <colunas>'.\n";
+            cout << "Ainda nao existe jardim\n";
         } else {
             jardim->listarArea();
         }
@@ -111,21 +115,21 @@ void Comandos::interpretar(const string& linha) { // le os comandos
 
     else if (comando == "lsolo") {
         if (jardim == nullptr) {
-            cout << "Ainda não existe jardim. Crie-o com 'jardim <linhas> <colunas>'.\n";
+            cout << "Ainda nao existe jardim.\n";
             return;
         }
 
         string pos;
         int raio = 0;
         if (!(ss >> pos)) {
-            cout << "Uso: lsolo <posição> [raio]\n";
+            cout << "Usa: lsolo <posicao> raio\n";
             return;
         }
 
         ss >> raio;
 
         if (pos.size() != 2) {
-            cout << "Posição inválida. Usa formato <letra><letra> (ex: df).\n";
+            cout << "Posicao invalida\n";
             return;
         }
 
@@ -134,7 +138,7 @@ void Comandos::interpretar(const string& linha) { // le os comandos
 
         if (lin < 0 || lin >= jardim->getNumLinhas() ||
             col < 0 || col >= jardim->getNumColunas()) {
-            cout << "Posição fora dos limites do jardim.\n";
+            cout << "Posicao fora dos limites do jardim.\n";
             return;
             }
 
@@ -153,12 +157,12 @@ void Comandos::interpretar(const string& linha) { // le os comandos
 
         if (ss >> pos >> tipo) {
             if (!jardim) {
-                cout << "Ainda não existe jardim. Crie-o primeiro.\n";
+                cout << "Ainda nao existe jardim\n";
                 return;
             }
 
             if (pos.size() != 2) {
-                cout << "Posição inválida. Usa formato <letra><letra> (ex: bc).\n";
+                cout << "Posicao invalida ex(bc)\n";
                 return;
             }
 
@@ -166,26 +170,25 @@ void Comandos::interpretar(const string& linha) { // le os comandos
             int col = tolower(pos[1]) - 'a';
 
             if (lin < 0 || lin >= jardim->getNumLinhas() || col < 0 || col >= jardim->getNumColunas()) {
-                cout << "Posição fora dos limites do jardim.\n";
+                cout << "Posicao fora dos limites do jardim\n";
                 return;
             }
 
             Planta* nova = Planta::criarPlanta(tipo, lin, col);
             if (!nova) {
-                cout << "Tipo de planta desconhecido.\n";
+                cout << "Tipo de planta desconhecida\n";
                 return;
             }
 
             if (jardim->adicionarPlanta(lin, col, nova)) {
-                cout << "Planta " << nova->getNome()
-                     << " colocada em " << pos << ".\n";
+                cout << "Planta " << nova->getNome() << " colocada em " << pos << ".\n";
                 jardim->imprimir();
             } else {
-                cout << "Já existe uma planta nessa posição.\n";
+                cout << "Posicao ocupada\n";
                 delete nova;
             }
         } else {
-            cout << "Uso: planta <posição> <tipo>\n";
+            cout << "Usa planta posicao tipo\n";
         }
     }
 
@@ -194,7 +197,7 @@ void Comandos::interpretar(const string& linha) { // le os comandos
     else if (comando == "entra") {
         string pos;
         if (!(ss >> pos) || pos.size() != 2) {
-            cout << "Uso: entra <posição> (ex: ab)\n";
+            cout << "Usa entra posicao\n";
             return;
         }
         if (!jardim) { cout << "Crie o jardim primeiro.\n"; return; }
@@ -212,21 +215,21 @@ void Comandos::interpretar(const string& linha) { // le os comandos
     }
 
     else if (comando == "sai") {
-        if (!jardineiro) { cout << "O jardineiro ainda não existe.\n"; return; }
+        if (!jardineiro) { cout << "O jardineiro nao esta dentro do jardim\n"; return; }
         jardineiro->sai();
         jardim->imprimir();
     }
 
 
     else if (comando == "c" || comando == "b" || comando == "e" || comando == "d") {
-        if (!jardineiro) { cout << "O jardineiro ainda não existe.\n"; return; }
+        if (!jardineiro) { cout << "O jardineiro nao esta dentro do jardim\n"; return; }
         jardineiro->mover(comando[0]);
         jardim->imprimir();
     }
 
 
     else if (comando == "adubo") {
-        if (jardim == nullptr) { cout << "Crie o jardim primeiro.\n"; return; }
+        if (jardim == nullptr) { cout << "Cria o jardim primeiro\n"; return; }
         string pos;
         if (!(ss >> pos)) { cout << "Uso: adubo <posição>\n"; return; }
         if (pos.size() != 2) { cout << "Formato inválido, ex: bc\n"; return; }
@@ -234,7 +237,7 @@ void Comandos::interpretar(const string& linha) { // le os comandos
         int lin = tolower(pos[0]) - 'a';
         int col = tolower(pos[1]) - 'a';
         if (lin < 0 || lin >= jardim->getNumLinhas() || col < 0 || col >= jardim->getNumColunas()) {
-            cout << "Posição fora dos limites.\n"; return;
+            cout << "Posicao fora dos limites.\n"; return;
         }
 
         pacote.aplicar(jardim->getSolo(lin, col));
@@ -244,7 +247,7 @@ void Comandos::interpretar(const string& linha) { // le os comandos
 
 
 
-    else { // erro
+    else {
         cout << "Comando desconhecido: " << comando << endl;
     }
 }

@@ -28,6 +28,8 @@ public:
     Orquidia(int linha, int coluna);
 
     void atualizar(Solo& solo);
+    bool querMultiplicar() const override;
+    void multiplicar() override;
     void morrer(Solo& solo);
     std::string getNome() const override;
 };

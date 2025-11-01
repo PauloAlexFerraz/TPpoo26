@@ -29,13 +29,13 @@ class Settings {
     };
     class Cacto {
         public:
-        static const int absorcao_agua_percentagem = 100;
+        static const int absorcao_agua_percentagem = 25;
         static const int absorcao_nutrientes = 5;
         static const int morre_agua_solo_maior = 100;
         static const int morre_agua_solo_instantes = 3;
         static const int morre_nutrientes_solo_menor = 1;
         static const int morre_nutrientes_solo_instantes = 3;
-        static const int multiplica_nutrientes_maior = 100;
+        static const int multiplica_nutrientes_maior = 50;
         static const int multiplica_agua_maior = 50;
     };
     class Roseira {
@@ -49,7 +49,7 @@ class Settings {
         static const int morre_agua_menor = 1;
         static const int morre_nutrientes_menor = 1;
         static const int morre_nutrientes_maior = 199;
-        static const int multiplica_nutrientes_maior = 100;
+        static const int multiplica_nutrientes_maior = 50;
         static const int nova_nutrientes = 25;
         static const int nova_agua_percentagem = 50;
         static const int original_nutrientes = 100;

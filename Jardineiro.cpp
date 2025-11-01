@@ -9,16 +9,16 @@ Jardineiro::Jardineiro(Jardim* j)
 
 void Jardineiro::entra(int l, int c) {
     if (!jardim) {
-        cout << "erro nao ha jardim\n";
+        cerr << "erro nao ha jardim\n";
         return;
     }
     if (entradasNesteTurno >= Settings::Jardineiro::max_entradas_saidas) {
-        cout << "O jardineiro ja entrou ou saiu neste turno.\n";
+        cout << "O jardineiro ja entrou ou saiu neste turno\n";
         return;
     }
     if (l < 0 || l >= jardim->getNumLinhas() ||
         c < 0 || c >= jardim->getNumColunas()) {
-        cout << "Posição invalida\n";
+        cout << "Posicao invalida\n";
         return;
     }
 
@@ -27,8 +27,7 @@ void Jardineiro::entra(int l, int c) {
     dentro = true;
     entradasNesteTurno++;
 
-    cout << "Jardineiro entrou em "
-         << (char)('A' + l) << (char)('A' + c) << ".\n";
+    cout << "Jardineiro entrou em "<< (char)('A' + l) << (char)('A' + c) << "\n";
 }
 
 void Jardineiro::sai() {
@@ -43,16 +42,16 @@ void Jardineiro::sai() {
 
     dentro = false;
     entradasNesteTurno++;
-    cout << "Jardineiro saiu do jardim.\n";
+    cout << "Jardineiro saiu do jardim\n";
 }
 
 void Jardineiro::mover(char direcao) {
     if (!dentro) {
-        cout << "O jardineiro está fora do jardim.\n";
+        cout << "O jardineiro esta fora do jardim\n";
         return;
     }
     if (movimentosTurno >= Settings::Jardineiro::max_movimentos) {
-        cout << "O jardineiro já fez o máximo de movimentos neste turno.\n";
+        cout << "O jardineiro nao se pode movimentar mais este turno\n";
         return;
     }
 
@@ -65,13 +64,13 @@ void Jardineiro::mover(char direcao) {
         case 'e': novaColuna--; break; // esquerda
         case 'd': novaColuna++; break; // direita
         default:
-            cout << "Direção invalida (usa c b e d).\n";
+            cout << "Direcao invalida (usa c b e d).\n";
             return;
     }
 
     if (novaLinha < 0 || novaLinha >= jardim->getNumLinhas() ||
         novaColuna < 0 || novaColuna >= jardim->getNumColunas()) {
-        cout << "movimento fora do jardim Usa 'sai'.\n";
+        cout << "Movimento fora do jardim Usa 'sai' para sair\n";
         return;
     }
 
@@ -79,9 +78,8 @@ void Jardineiro::mover(char direcao) {
     coluna = novaColuna;
     movimentosTurno++;
 
-    cout << "Jardineiro moveu-se para "
-         << (char)('A' + linha) << (char)('A' + coluna)
-         << " (" << movimentosTurno << "/" << Settings::Jardineiro::max_movimentos << " movimentos).\n";
+    cout << "Jardineiro moveu-se para "<< (char)('A' + linha) << (char)('A' + coluna)
+    << "\n" << movimentosTurno << "/" << Settings::Jardineiro::max_movimentos << " movimentos restantes\n";
 }
 
 void Jardineiro::novoTurno() {

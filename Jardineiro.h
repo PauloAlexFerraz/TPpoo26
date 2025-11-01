@@ -21,7 +21,7 @@ public:
     void entra(int l, int c);
     void sai();
     void mover(char direcao);
-    void novoTurno(); // reset ao contador no avanca
+    void novoTurno();
 
     bool estaDentro() const { return dentro; }
     int getLinha() const { return linha; }

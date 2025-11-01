@@ -11,11 +11,11 @@
 
 class Adubo {
 private:
-    int quantidade; // unidades restantes do pacote
+    int quantidade;
 public:
-    Adubo(); // construtor
-    void aplicar(Solo &solo); // aplica 10 unidades ao solo
-    bool vazio() const;       // retorna true se o pacote estiver vazio
+    Adubo();
+    void aplicar(Solo &solo);
+    bool vazio() const;
 };
 
 #endif //ADUBO_H

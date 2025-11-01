@@ -5,7 +5,7 @@
 #include "Solo.h"
 
 
-class Planta; // 👈 forward declaration
+class Planta;
 class Jardineiro;
 
 class Jardim {
@@ -13,7 +13,7 @@ private:
     int linhas;
     int colunas;
     Solo** solos;
-    Planta** plantas; // 👈 adiciona esta linha
+    Planta** plantas;
     Jardineiro* jardineiro;
 
     char numeroParaLetra(int n) const;
@@ -28,6 +28,7 @@ public:
 
 
     bool adicionarPlanta(int linha, int coluna, Planta* p);
+    bool criarPlantaAdjacente(Planta* p);
     bool removePlanta(int linha, int coluna);
     Planta* getPlanta(int linha, int coluna) const;
     Solo& getSolo(int linha, int coluna);

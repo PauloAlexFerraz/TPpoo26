@@ -6,12 +6,10 @@ using namespace std;
 Jardim::Jardim(int nLinhas, int nColunas)
     : linhas(nLinhas), colunas(nColunas), solos(nullptr), plantas(nullptr), jardineiro(nullptr)
 {
-    // Aloca solos
     solos = new Solo*[linhas];
     for (int i = 0; i < linhas; ++i)
         solos[i] = new Solo[colunas];
 
-    // Aloca plantas
     plantas = new Planta*[linhas * colunas];
     for (int i = 0; i < linhas * colunas; ++i)
         plantas[i] = nullptr;
@@ -42,7 +40,6 @@ void Jardim::imprimir() const {
         cout << numeroParaLetra(i) << " ";
         for (int j = 0; j < colunas; ++j) {
 
-            // ✅ se o jardineiro estiver aqui, mostra '*'
             if (jardineiro && jardineiro->estaDentro() &&
                 jardineiro->getLinha() == i &&
                 jardineiro->getColuna() == j) {
@@ -50,7 +47,6 @@ void Jardim::imprimir() const {
                 continue;
                 }
 
-            // mantém a tua lógica original
             Planta* p = plantas[i * colunas + j];
             cout << (p ? p->getSimbolo() : ' ');
         }
@@ -67,6 +63,35 @@ bool Jardim::adicionarPlanta(int linha, int coluna, Planta* p) {
 
     plantas[idx] = p;
     return true;
+}
+
+bool Jardim::criarPlantaAdjacente(Planta* p) {
+    if (!p || !p->estaViva()) return false;
+
+    const int l = p->getLinha();
+    const int c = p->getColuna();
+
+    const int dl[4] = {-1, 1, 0, 0};
+    const int dc[4] = { 0, 0,-1, 1};
+
+    for (int k = 0; k < 4; ++k) {
+        const int nl = l + dl[k];
+        const int nc = c + dc[k];
+
+        if (nl < 0 || nl >= linhas || nc < 0 || nc >= colunas)
+            continue;
+
+        if (getPlanta(nl, nc) == nullptr) {
+            Planta* nova = Planta::criarPlanta(p->getSimbolo(), nl, nc);
+            if (!nova) continue;
+
+            if (adicionarPlanta(nl, nc, nova)) {
+                std::cout << "Nova " << nova->getNome() << " criada em " << char('A'+nl) << char('A'+nc) << "\n";
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 bool Jardim::removePlanta(int linha, int coluna) {
@@ -86,19 +111,17 @@ Solo& Jardim::getSolo(int linha, int coluna) {
 }
 
 void Jardim::listarArea() const {
-    cout << "\n--- Informação do Solo ---\n";
+    cout << "\nInformacao do Solo\n";
     for (int i = 0; i < linhas; ++i) {
         for (int j = 0; j < colunas; ++j) {
             cout << numeroParaLetra(i) << numeroParaLetra(j)
-                 << " -> Água: " << solos[i][j].getAgua()
-                 << ", Nutrientes: " << solos[i][j].getNutrientes() << endl;
+                 << " agua: " << solos[i][j].getAgua() << " Nutrientes: " << solos[i][j].getNutrientes() << endl;
         }
     }
-    cout << "-----------------------------------\n";
 }
 
 void Jardim::listarSolo(int lin, int col, int raio) const {
-    cout << "\n--- Informação do Solo (raio " << raio << ") ---\n";
+    cout << "\nInformacao do Solo ( com raio " << raio << ")\n";
     int linInicio = max(0, lin - raio);
     int linFim = min(linhas - 1, lin + raio);
     int colInicio = max(0, col - raio);
@@ -110,15 +133,13 @@ void Jardim::listarSolo(int lin, int col, int raio) const {
             Planta* p = plantas[i * colunas + j];
 
             cout << numeroParaLetra(i) << numeroParaLetra(j)
-                 << " -> Água: " << s.getAgua()
-                 << ", Nutrientes: " << s.getNutrientes();
+                 << " agua: " << s.getAgua() << ", Nutrientes: " << s.getNutrientes();
 
             if (p)
-                cout << " | Planta: " << p->getNome() << (p->estaViva() ? " (viva)" : " (morta)");
+                cout << " Planta: " << p->getNome() << endl;
             else
-                cout << " | [vazio]";
+                cout << "vazio";
             cout << endl;
         }
     }
-    cout << "-----------------------------------\n";
 }

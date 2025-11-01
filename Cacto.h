@@ -18,9 +18,11 @@ private:
 public:
     Cacto(int linha, int coluna);
 
-    void atualizar(Solo& solo) override;     // comportamento por instante
-    void morrer(Solo& solo) override;                 // função para lidar com morte
-    std::string getNome() const override;    // nome textual
+    void atualizar(Solo& solo) override;
+    void morrer(Solo& solo) override;
+    bool querMultiplicar() const override;
+    void multiplicar() override;
+    std::string getNome() const override;
 };
 
 #endif

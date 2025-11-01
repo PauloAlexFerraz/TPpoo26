@@ -13,7 +13,7 @@
 
 class Comandos {
 private:
-    Jardim* jardim;  // ponteiro para o jardim atual (criado dinamicamente)
+    Jardim* jardim;
     Jardineiro* jardineiro;
     Adubo pacote;
 
@@ -21,8 +21,8 @@ public:
     Comandos();
     ~Comandos();
 
-    void interpretar(const std::string& linha); // interpreta uma linha de comando
-    void cicloPrincipal();                      // loop principal de leitura de comandos
+    void interpretar(const std::string& linha);
+    void cicloPrincipal();
 };
 
 #endif

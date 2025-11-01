@@ -10,17 +10,14 @@
 
 class Solo {
 private:
-    int agua;        // unidades de água
-    int nutrientes;  // unidades de nutrientes
-
+    int agua;
+    int nutrientes;
 public:
     Solo();
 
-    // getters
     int getAgua() const;
     int getNutrientes() const;
 
-    // operações
     void adicionarAgua(int valor);
     void adicionarNutrientes(int valor);
     void removerAgua(int valor);

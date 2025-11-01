@@ -11,7 +11,7 @@ const int Orquidia::MORRE_AGUA_INSTANTES = 2;
 const int Orquidia::MORRE_NUTRIENTES_MENOR = 2;
 const int Orquidia::MORRE_NUTRIENTES_INSTANTES = 3;
 const int Orquidia::MULTIPLICA_AGUA_MAIOR = 50;
-const int Orquidia::MULTIPLICA_NUTRIENTES_MAIOR = 80;
+const int Orquidia::MULTIPLICA_NUTRIENTES_MAIOR = 70;
 const int Orquidia::NOVA_AGUA_PERCENTAGEM = 50;
 const int Orquidia::NOVA_NUTRIENTES = 20;
 
@@ -44,7 +44,6 @@ void Orquidia::atualizar(Solo& solo) {
     agua += absorvidaAgua - PERDA_AGUA;
     nutrientes += absorvidaNutrientes - PERDA_NUTRIENTES;
 
-    // Condições fatais
     if (aguaSolo > MORRE_AGUA_MAIOR)
         instantesAguaAlta++;
     else
@@ -58,20 +57,17 @@ void Orquidia::atualizar(Solo& solo) {
     if (instantesAguaAlta >= MORRE_AGUA_INSTANTES ||
         instantesNutrientesBaixos >= MORRE_NUTRIENTES_INSTANTES) {
         morrer(solo);
-        return;
     }
 
-    // Multiplicação
-    if (agua > MULTIPLICA_AGUA_MAIOR &&
-        nutrientes > MULTIPLICA_NUTRIENTES_MAIOR) {
-        cout << "Orquídea ("
-             << (char)('A' + linha)
-             << (char)('A' + coluna)
-             << ") quer multiplicar-se!\n";
+}
 
-        agua = (agua * NOVA_AGUA_PERCENTAGEM) / 100;
-        nutrientes = NOVA_NUTRIENTES;
-    }
+bool Orquidia::querMultiplicar() const {
+    return viva && agua > MULTIPLICA_AGUA_MAIOR && nutrientes > MULTIPLICA_NUTRIENTES_MAIOR;
+}
+
+void Orquidia::multiplicar() {
+    agua = (agua * NOVA_AGUA_PERCENTAGEM) / 100;
+    nutrientes = NOVA_NUTRIENTES;
 }
 
 void Orquidia::morrer(Solo& solo) {
@@ -81,10 +77,7 @@ void Orquidia::morrer(Solo& solo) {
     nutrientes = 0;
     agua = 0;
 
-    cout << "Orquídea morreu em ("
-         << (char)('A' + linha)
-         << (char)('A' + coluna)
-         << ")\n";
+    cout << "Orquídea morreu em"<< (char)('A' + linha)<< (char)('A' + coluna)<< "\n";
 }
 
 std::string Orquidia::getNome() const{

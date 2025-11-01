@@ -10,18 +10,15 @@ Planta::Planta(int l, int c, char simb)
 
 Planta::~Planta() = default;
 
-// Apenas placeholders — o comportamento real está nas subclasses
 void Planta::atualizar(Solo& solo) {}
 
 void Planta::morrer(Solo& solo)
 {
     viva=false;
-
     agua=0;
     nutrientes=0;
 
 }
-
 
 std::string Planta::getNome() const {
     return "Planta";
@@ -35,7 +32,7 @@ Planta* Planta::criarPlanta(char tipo, int linha, int coluna) {
     case 'e': return new ErvaDaninha(linha, coluna);
     case 'x': return new Orquidia(linha, coluna);
     default:
-        std::cout << "Tipo de planta desconhecido: " << tipo << std::endl;
+        std::cout << "Tipo de planta desconhecido " << tipo << std::endl;
         return nullptr;
     }
 }

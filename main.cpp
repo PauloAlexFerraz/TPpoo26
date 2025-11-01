@@ -3,7 +3,6 @@
 #include <cstdlib>
 
 int main() {
-   // srand(time(nullptr)); // inicializa aleatórios
     Comandos comandos;
     comandos.cicloPrincipal();
     return 0;

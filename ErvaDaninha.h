@@ -11,15 +11,18 @@
 
 class ErvaDaninha : public Planta {
 private:
-    int instantesViva = 0;        // quantos instantes já passou viva
-    bool madura = false;      // se está madura e pode espalhar-se
+    int instantesViva = 0;
+    int instantesDesdeUltimaMultiplicacao;
+    bool quer_multiplicar;
 
 public:
     ErvaDaninha(int linha, int coluna);
 
-    void atualizar(Solo& solo);     // comportamento por instante
-    void morrer(Solo& solo);                 // comportamento ao morrer
-    std::string getNome() const override;    // nome textual
+    void atualizar(Solo& solo);
+    bool querMultiplicar() const override;
+    void multiplicar() override;
+    void morrer(Solo& solo);
+    std::string getNome() const override;
 };
 
 #endif
