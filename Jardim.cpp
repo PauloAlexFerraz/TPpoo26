@@ -69,6 +69,14 @@ bool Jardim::adicionarPlanta(int linha, int coluna, Planta* p) {
     return true;
 }
 
+bool Jardim::removePlanta(int linha, int coluna) {
+    int idx = linha * colunas + coluna;
+    if (plantas[idx] == nullptr) return false;
+    delete plantas[idx];
+    plantas[idx] = nullptr;
+    return true;
+}
+
 Planta* Jardim::getPlanta(int linha, int coluna) const {
     return plantas[linha * colunas + coluna];
 }

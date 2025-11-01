@@ -24,6 +24,7 @@ void Cacto::atualizar(Solo& solo) {
     else
         instantesAguaAlta = 0;
 
+
     if (nutrientesSolo < Settings::Cacto::morre_nutrientes_solo_menor)
         instantesNutrientesZero++;
     else
@@ -36,7 +37,7 @@ void Cacto::atualizar(Solo& solo) {
         }
 
     // Absorção de água e nutrientes conforme Settings
-    int absorvidaAgua = (aguaSolo * Settings::Cacto::absorcao_agua_percentagem) / 100;
+    int absorvidaAgua = (aguaSolo * Settings::Cacto::absorcao_agua_percentagem-1) / 100;
     int absorvidaNutrientes = (nutrientesSolo < Settings::Cacto::absorcao_nutrientes)
                               ? nutrientesSolo
                               : Settings::Cacto::absorcao_nutrientes;
@@ -63,8 +64,6 @@ void Cacto::atualizar(Solo& solo) {
         nutrientes /= 2;
         agua /= 2;
 
-        // Aqui poderias notificar o Jardim para gerar outro cacto próximo
-        // Exemplo: jardim->adicionarPlanta(new Cacto(...));
     }
 }
 

@@ -2,7 +2,6 @@
 #include <iostream>
 using namespace std;
 
-// Inicialização das constantes
 const int Orquidia::ABSORCAO_AGUA = 8;
 const int Orquidia::ABSORCAO_NUTRIENTES = 10;
 const int Orquidia::PERDA_AGUA = 3;
@@ -34,7 +33,6 @@ void Orquidia::atualizar(Solo& solo) {
     int aguaSolo = solo.getAgua();
     int nutrientesSolo = solo.getNutrientes();
 
-    // Absorve água e nutrientes do solo
     int absorvidaAgua = (aguaSolo < ABSORCAO_AGUA) ? aguaSolo : ABSORCAO_AGUA;
     int absorvidaNutrientes = (nutrientesSolo < ABSORCAO_NUTRIENTES)
                               ? nutrientesSolo

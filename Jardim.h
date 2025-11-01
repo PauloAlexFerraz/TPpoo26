@@ -28,6 +28,7 @@ public:
 
 
     bool adicionarPlanta(int linha, int coluna, Planta* p);
+    bool removePlanta(int linha, int coluna);
     Planta* getPlanta(int linha, int coluna) const;
     Solo& getSolo(int linha, int coluna);
 

@@ -19,6 +19,7 @@ public:
     ~Planta(); // destrutor normal
 
     virtual void atualizar(Solo& solo)=0;
+    virtual void morrer(Solo& solo)=0;
     virtual std::string getNome() const=0;
 
     bool estaViva() const { return viva; }

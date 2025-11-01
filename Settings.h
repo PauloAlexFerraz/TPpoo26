@@ -29,7 +29,7 @@ class Settings {
     };
     class Cacto {
         public:
-        static const int absorcao_agua_percentagem = 25;
+        static const int absorcao_agua_percentagem = 100;
         static const int absorcao_nutrientes = 5;
         static const int morre_agua_solo_maior = 100;
         static const int morre_agua_solo_instantes = 3;

@@ -11,7 +11,6 @@ private:
     int instantesAguaAlta;
     int instantesNutrientesBaixos;
 
-    // Constantes específicas da Orquídea
     static const int ABSORCAO_AGUA;
     static const int ABSORCAO_NUTRIENTES;
     static const int PERDA_AGUA;

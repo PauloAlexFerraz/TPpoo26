@@ -12,8 +12,8 @@ private:
     Jardim* jardim;
 
     int movimentosTurno;
-    bool entrouNesteTurno;
-    bool saiuNesteTurno;
+    int entradasNesteTurno;
+
 
 public:
     explicit Jardineiro(Jardim* j);

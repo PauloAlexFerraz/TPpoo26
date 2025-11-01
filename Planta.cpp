@@ -11,9 +11,17 @@ Planta::Planta(int l, int c, char simb)
 Planta::~Planta() = default;
 
 // Apenas placeholders — o comportamento real está nas subclasses
-void Planta::atualizar(Solo& solo) {
-    std::cout << "Atualizar() chamado na planta base — nenhuma ação.\n";
+void Planta::atualizar(Solo& solo) {}
+
+void Planta::morrer(Solo& solo)
+{
+    viva=false;
+
+    agua=0;
+    nutrientes=0;
+
 }
+
 
 std::string Planta::getNome() const {
     return "Planta";

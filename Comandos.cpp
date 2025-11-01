@@ -9,7 +9,7 @@
 
 
 
-#include "Roseira.h"
+#include "Planta.h"
 #include "Jardineiro.h"
 
 using namespace std;
@@ -80,13 +80,16 @@ void Comandos::interpretar(const string& linha) { // le os comandos
 
         cout << "A avancar 1 turno...\n";
 
-        // percorre todo o jardim
         for (int i = 0; i < jardim->getNumLinhas(); ++i) {
             for (int j = 0; j < jardim->getNumColunas(); ++j) {
                 Planta* p = jardim->getPlanta(i, j);
                 if (p != nullptr && p->estaViva()) {
                     Solo& solo = jardim->getSolo(i, j);
                     p->atualizar(solo);
+                    if (!p->estaViva())
+                    {
+                        jardim->removePlanta(i,j);
+                    }
                 }
             }
         }
@@ -96,8 +99,6 @@ void Comandos::interpretar(const string& linha) { // le os comandos
 
         jardim->imprimir();
     }
-
-
 
 
     else if (comando == "larea") {
